@@ -1,0 +1,23 @@
+security:
+    providers:
+         forex:
+             entity:
+                 class: App\Entity\Usuario
+                 property: nombre
+    encoders:
+         App\Entity\Usuario:
+          algorithm: plaintext
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: getPrecio
+            provider: forex
+            logout:
+                path:   /logout
+                target: /login  
